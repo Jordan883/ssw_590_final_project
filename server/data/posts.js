@@ -33,6 +33,17 @@ const createPost = async (
   return post;
 }
 
+const getAllPosts = async () => {
+  const postCollection = await posts();
+  let allPosts = await postCollection.find({}).toArray();
+  if(!allPosts) throw {status: '404', error: "No posts found"}
+  allPosts = allPosts.map(post => {
+    post._id = post._id.toString();
+    return post
+  });
+  return allPosts;
+}
+
 const getPostById = async (
   postId
 ) => {
@@ -124,6 +135,16 @@ const addCommentToPost = async (
   return await getPostById(postId);
 }
 
+const getCommentsByPostId = async (postId) => {
+  postId = helpers.stringInputHandler(postId, 'Post ID');
+  if (!ObjectId.isValid(postId)) throw 'Error: Post Object ID is not valid';
+
+  const post = await getPostById(postId);
+  let comments = post.comments;
+  if (!comments) throw {status: '404', error: "No comments found for this post"}
+  return comments;
+}
+
 const deleteComment = async (
   postId,
   commentId,
@@ -160,9 +181,11 @@ const deleteComment = async (
 }
 
 module.exports = {
-  createPost, 
+  createPost,
+  getAllPosts, 
   getPostById, 
   updatePost,
   addCommentToPost, 
+  getCommentsByPostId,
   deleteComment
 };
