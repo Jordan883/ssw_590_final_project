@@ -1,12 +1,22 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const session = require('express-session');
 const configRoutes = require('./routes');
 // const http = require("http");
 
 //app
 app.use(express.json({limit: '50mb'}));
 app.use(cors());
+
+app.use(
+  session({
+      name: 'AuthCookie',
+      secret: 'some secret string!',
+      resave: false,
+      saveUninitialized: true
+  })
+);
 
 
 // db
