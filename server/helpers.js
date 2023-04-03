@@ -35,6 +35,14 @@ const stringValidation = (input, forbidden, errMessage) => {
     }
 };
 
+const senseValidation = (input, name) => {
+    input = stringInputHandler(input);
+    const regex = new RegExp('[a-zA-Z]', 'g');
+    if (!regex.test(input)){
+        throw `Error: ${name} should include at least one alphabetical character.`;
+    }
+}
+
 const sessionValidation = (user) => {
     if (typeof user !== 'object' || user === null){
         throw 'Error: User session object is invalid.';
@@ -93,6 +101,7 @@ module.exports = {
     stringLengthCheck,
     stringRangeCheck,
     stringValidation,
+    senseValidation,
     sessionValidation,
     sessionComparator,
 
