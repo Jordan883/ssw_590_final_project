@@ -40,6 +40,7 @@ router.route("/login").post(async (req, res) => {
   try {
     username = helpers.usernameHandler(username);
     password = helpers.passwordHandler(password);
+    // console.log("1", username, password);
   } catch (e) {
     return res.status(400).json({ error: e });
   }
@@ -54,6 +55,7 @@ router.route("/login").post(async (req, res) => {
     if (e === "Error: Either the username or password is invalid") {
       return res.status(403).json({ error: e });
     } else {
+      console.log(e);
       return res.status(500).json({ error: e });
     }
   }

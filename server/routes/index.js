@@ -3,7 +3,7 @@ const userRoutes = require('./users');
 
 const constructorMethod = (app) => {
   app.use('/posts', postRoutes);
-  app.use(userRoutes);
+  app.use('/user', userRoutes);
 
   app.use('*', (req, res) => {
     res.sendStatus(404);
