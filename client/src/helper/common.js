@@ -85,3 +85,8 @@ export const isValidNumber = (num,param) => {
   if(!num.match(/^\d+$/)) throw new Error(`Invalid ${param}`);
   return parseInt(num);
 }
+
+export const isEqualPassword = (password, confirmPassword) => {
+  if(password !== confirmPassword) throw new Error("Passwords don't match")
+  else return confirmPassword;
+}
