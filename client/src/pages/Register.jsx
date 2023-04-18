@@ -34,7 +34,7 @@ function Register() {
       const data = {"username" : username, "password" : password}
       const response = await api.routes.register(data);
       // console.log(response.data);
-      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('id',JSON.stringify(response.data._id));
       navigate("/");
     } catch (e) {
       setError(e.response.data.error);

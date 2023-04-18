@@ -8,8 +8,8 @@ import { useState, useEffect } from "react";
 function AppNavbar() {
   const [user, setUser] = useState();
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user"))) {
-      setUser(localStorage.getItem("user"));
+    if (JSON.parse(localStorage.getItem("id"))) {
+      setUser(JSON.parse(localStorage.getItem("id")));
     }
   }, []);
 
@@ -31,12 +31,15 @@ function AppNavbar() {
             }}
             navbarScroll
           >
+            <Link to="/create-post" style={{ textDecoration: "none" }}>
+                  <p className="nav-link">Create Post</p>
+            </Link>
             {user ? (
               <>
-                <Link to="/logout" style={{ textDecoration: "none" }}>
+                <Link to="/login" style={{ textDecoration: "none" }} onClick={() => {localStorage.clear()}}>
                   <p className="nav-link">Logout</p>
                 </Link>
-              </>
+              </> 
             ) : (
               <>
                 <Link to="/login" style={{ textDecoration: "none" }}>

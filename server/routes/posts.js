@@ -9,20 +9,22 @@ router
   .route("/")
   .post(async (req, res) => {
     let { title, text } = req.body;
-    let userThatPosted = req.session.user;
+    // let userThatPosted = req.session.user;
     try {
       title = helpers.stringInputHandler(title, "Title");
       helpers.senseValidation(title, "Title");
       text = helpers.stringInputHandler(text, "Post text");
       helpers.senseValidation(text, "Post text");
-      userThatPosted = helpers.sessionValidation(userThatPosted);
+      // userThatPosted = helpers.sessionValidation(userThatPosted);
     } catch (e) {
+      console.log(e);
       return res.status(400).json({ error: e });
     }
     try {
-      const newPost = await postData.createPost(title, text, userThatPosted);
+      const newPost = await postData.createPost(title, text);
       return res.json(newPost);
     } catch (e) {
+      console.log(e);
       return res.status(500).json({ error: e });
     }
   })

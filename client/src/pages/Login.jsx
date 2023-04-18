@@ -13,7 +13,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user"))) {
+    if (JSON.parse(localStorage.getItem("id"))) {
       navigate("/");
     }
   }, []);
@@ -25,7 +25,7 @@ function Login() {
       setPassword(helper.common.isValidPassword(password));
       setError();
     } catch (e) {
-      setError(e.response.data.error);
+      setError(e);
       return;
     }
 
@@ -33,7 +33,7 @@ function Login() {
       const data = {"username" : username, "password" : password}
       const response = await api.routes.login(data);
       // console.log(response.data);
-      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('id', JSON.stringify(response.data._id));
       navigate("/");
     } catch (e) {
       setError(e.response.data.error);

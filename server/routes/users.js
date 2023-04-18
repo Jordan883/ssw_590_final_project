@@ -20,6 +20,8 @@ router.route("/signup").post(async (req, res) => {
   }
   try {
     const newUser = await userData.signup(username, password);
+    req.session.user = newUser;
+    req.session.save()
     return res.json(newUser);
   } catch (e) {
     if (e === "Error: User with this username already exists.") {
@@ -50,6 +52,8 @@ router.route("/login").post(async (req, res) => {
       _id: user._id,
       username: user.username,
     };
+    req.session.save()
+    // console.log(req.session);
     return res.json(user);
   } catch (e) {
     if (e === "Error: Either the username or password is invalid") {

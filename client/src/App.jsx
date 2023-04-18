@@ -7,6 +7,7 @@ import AppNavbar from './components/AppNavbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import CreatePost from './pages/CreatePost';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/posts' element={<Posts />} />
+            <Route path='/create-post' element={<CreatePost />} />
             <Route path='/post/:postId' element={<SinglePost />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />

@@ -5,21 +5,20 @@ const helpers = require('../helpers');
 
 const createPost = async (
   title,
-  text,
-  userThatPosted
+  text
 ) => {
   title = helpers.stringInputHandler(title, 'Title');
   helpers.senseValidation(title, 'Title');
   text = helpers.stringInputHandler(text, 'Post text');
   helpers.senseValidation(text, 'Post text');
-  userThatPosted = helpers.sessionValidation(userThatPosted);
-  userThatPosted._id = new ObjectId(userThatPosted._id);
+  // userThatPosted = helpers.sessionValidation(userThatPosted);
+  // userThatPosted._id = new ObjectId(userThatPosted._id);
 
   const postCollection = await posts();
   const newPost = {
     title: title,
-    text: ingredients,
-    userThatPosted: userThatPosted, 
+    ingredients: text,
+    // userThatPosted: userThatPosted, 
     comments: []
   }
 
@@ -54,10 +53,10 @@ const getPostById = async (
   const post = await postCollection.findOne({_id: new ObjectId(postId)});
   if (post === null) throw 'Error: No post with that id.';
   post._id = post._id.toString();
-  post.userThatPosted._id = post.userThatPosted._id.toString();
+  // post.userThatPosted._id = post.userThatPosted._id.toString();
   for (let comment of post.comments){
     comment._id = comment._id.toString();
-    comment.userThatPostedComment._id = comment.userThatPostedComment._id.toString();
+    // comment.userThatPostedComment._id = comment.userThatPostedComment._id.toString();
   }
   return post;
 }

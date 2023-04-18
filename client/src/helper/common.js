@@ -90,3 +90,22 @@ export const isEqualPassword = (password, confirmPassword) => {
   if(password !== confirmPassword) throw new Error("Passwords don't match")
   else return confirmPassword;
 }
+
+export const stringInputHandler = (input, name) => {
+    if (typeof input !== 'string'){
+        throw `Error: ${name} must be a string.`;
+    }
+    input = input.trim();
+    if (input.length === 0){
+        throw `Error: ${name} cannot be only whitespace.`;
+    }
+    return input;
+};
+
+export const senseValidation = (input, name) => {
+    input = stringInputHandler(input);
+    const regex = new RegExp('[a-zA-Z]', 'g');
+    if (!regex.test(input)){
+        throw `Error: ${name} should include at least one alphabetical character.`;
+    }
+}
