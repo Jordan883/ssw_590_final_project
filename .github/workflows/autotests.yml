@@ -28,6 +28,8 @@ jobs:
           cache: "npm"
           cache-dependency-path: "server/package-lock.json"
 
-      - run: cd server
-      - run: npm ci
-      - run: npm test
+      - name: npm ci and test
+        run: | 
+          cd server
+          npm ci
+          npm test
