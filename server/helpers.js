@@ -7,7 +7,7 @@ const stringInputHandler = (input, name) => {
     }
     input = input.trim();
     if (input.length === 0){
-        throw `Error: ${name} cannot be only whitespace.`;
+        throw `Error: ${name} cannot be empty or only whitespace.`;
     }
     return input;
 };
