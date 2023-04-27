@@ -1,17 +1,17 @@
 import {base} from './baseURL';
 
 export const login = (data) => {
-    return base.post(`/user/login`, data);
+    return base.post(`/api/user/login`, data);
 }
 
 export const register = (data) => {
-    return base.post(`/user/signup`, data);
+    return base.post(`/api/user/signup`, data);
 }
 
 export const createPost = (data) => {
-    return base.post(`/posts/`, data);
+    return base.post(`/api/posts/`, data);
 }
 
 export const getAllPosts = () => {
-    return base.get('/posts/');
+    return base.get('/api/posts/');
 }
