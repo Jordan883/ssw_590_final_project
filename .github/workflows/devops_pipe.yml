@@ -5,7 +5,7 @@ name: Autotesting
 
 on:
   push:
-    branches: ["main", "full-pipe"]
+    branches: ["main", "full_pipe"]
 
 jobs:
   server-test:
