@@ -5,7 +5,7 @@ name: Autotesting
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "devops-pipe"]
 
 jobs:
   server-test:
@@ -34,6 +34,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    needs: server-test
 
     strategy:
       matrix:
@@ -60,21 +61,18 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: npm ci/build, server
-        run: | 
-          cd server
-          npm ci
-          npm run-build --if-present
         
-      - name: Build and push
+      - name: Build and push server to docker
         uses: docker/build-push-action@v4
         with:
+          context: server
           push: true
-          tags: user/app:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ssw-590-final-project:latest-pipe-server
       
-      - name: npm ci/build, client
-        run: | 
-          cd client
-          npm ci
-          npm run-build --if-present
+      - name: Build and push client to docker
+        uses: docker/build-push-action@v4
+        with:
+          context: client
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ssw-590-final-project:latest-pipe-client
+      
