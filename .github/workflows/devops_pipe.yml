@@ -5,7 +5,7 @@ name: Autotesting
 
 on:
   push:
-    branches: ["main", "devops-pipe"]
+    branches: ["main", "full-pipe"]
 
 jobs:
   server-test:
